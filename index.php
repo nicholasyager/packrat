@@ -18,7 +18,7 @@
 </script>
 
 <link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon" />
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Monda" type="text/css"/>
+<!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Monda" type="text/css"/> -->
 <link rel="stylesheet" href="styles/packrat.css"/>
 
 </head>
