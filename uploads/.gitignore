@@ -1,0 +1,6 @@
+# Images #
+######################
+# This is added to prevent the accidental inclusion of sensitive images in the commit.
+*.jpg
+*.png
+*.gif
