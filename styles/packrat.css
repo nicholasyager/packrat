@@ -97,14 +97,14 @@ body {
 #searchbar input[type=text] {
 
 	position:relative;
-	width:90%;
+	width:95%;
 
 }
 
 #login input[type=text], #login input[type=password] {
 
 	position:relative;
-	width:40%;
+	width:45%;
 
 }
 
