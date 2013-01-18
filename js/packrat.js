@@ -191,11 +191,18 @@ function fetchDocuments(query, type) {
 		type="all";
 
 	}
+		
+	// Adjust the widths of the columns to better fit the display.
+	var defaultWidth = 240;
+	var displayWidth = $(document).width();
+	var differentWidths = displayWidth / defaultWidth;
+	var maximumRow = Math.floor(differentWidths);
+	var bestWidth = displayWidth / maximumRow;
 
 	$.ajax({
 		url : "scripts/fetchImages.php",
 		type : "POST",
-		data : "token="+token+"&type="+type+"&query="+query,
+		data : "token="+token+"&type="+type+"&query="+query+"&bestwidth="+bestWidth,
 		success : function(JSONdata) {
 
 			// Load isotope and all of the images
@@ -204,11 +211,12 @@ function fetchDocuments(query, type) {
 
 			$("#UI").html("");
 
+
 			$("#UI").isotope({
 				itemSelector : '.item',
-				layoutMode : "masonry",
+				layoutMode : "fitRows",
 				masonry: {
-					columnWidth: 240
+					columnWidth: bestWidth
 				}
 			});
 
@@ -219,7 +227,7 @@ function fetchDocuments(query, type) {
 				var imageThumb = "uploads/" + value.Pages[1];
 				var image = "uploads/" + value.Pages[1];
 
-				var $item = $('<div class="item" data-id="'+key+'" data-json='+"'"+JSON.stringify(value)+"'"+'" > <span class="itemLabel">'+value.Metadata.Title+'</span><img src="' + imageThumb + '" width="' + value.Width + '" height="' + value.Height + '" /></div>');
+				var $item = $('<div class="item" data-id="'+key+'" data-json='+"'"+JSON.stringify(value)+"'"+'" > <span class="itemLabel">'+value.Metadata.Title+'</span><img src="' + imageThumb + '" width="' + bestWidth + '" height="' + value.Height + '" /></div>');
 				$('#UI').isotope( 'insert', $item);
 			
 				$($item).click(function() {

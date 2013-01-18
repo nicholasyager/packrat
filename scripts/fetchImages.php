@@ -8,7 +8,8 @@
 
 	$query = mysql_real_escape_string($_POST["query"]);
 	$type = mysql_real_escape_string($_POST['type']);
-	
+	$bestWidth = $_POST['bestwidth'];
+
 	// Take the token, check to see it it's authentic, and then use it to look up the users ID number.
 
 	$token = mysql_real_escape_string($_COOKIE['token']);
@@ -65,10 +66,9 @@
 			$rowString = "";
 		} else {
 			$rowString = ", ";
-		}
-		$newWidth = 240;
-		$newHeight = ( $dimensions[1] * $newWidth) / $dimensions[0];
-		$rowString .= ' "' . $row['ID'] . '" : { "Width" : "'.$newWidth.'", "Height" : "'.$newHeight . '", "Metadata" : ' . $row['Metadata'] . ' , "Pages" : ' . $row['Pages'] . ' , "Tags" : ' . $row['Tags'] . ' }';
+		};
+		$newHeight = ( $dimensions[1] * $bestWidth) / $dimensions[0];
+		$rowString .= ' "' . $row['ID'] . '" : { "Width" : "'.$bestWidth.'", "Height" : "'.$newHeight . '", "Metadata" : ' . $row['Metadata'] . ' , "Pages" : ' . $row['Pages'] . ' , "Tags" : ' . $row['Tags'] . ' }';
 
 		$JSONresult .= $rowString;
 

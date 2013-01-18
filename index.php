@@ -24,7 +24,7 @@
 </head>
 
 
-<body>
+<body onResize="$('#UI').isotope('reLayout');">
 
 <script>
 
