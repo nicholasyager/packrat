@@ -184,6 +184,24 @@ function eraseCookie(name) {
         createCookie(name,"",-1);
 }
 
+function dynamicLayout() {
+
+	var defaultWidth = 240;
+	var displayWidth = $(document).width();
+	var differentWidths = displayWidth / defaultWidth;
+	var maximumRow = Math.floor(differentWidths);
+	var bestWidth = displayWidth / maximumRow;
+
+	var currentHeight = $(".item img").height();
+	var currentWidth = $(".item img").width();
+	var newHeight = ( currentHeight * bestWidth ) / currentWidth;
+
+	$(".item img").width(bestWidth + "px").height(newHeight + "px");
+	
+	$("#UI").isotope("reLayout");
+
+}
+
 function fetchDocuments(query, type) {
 
 	if (query == "") {
