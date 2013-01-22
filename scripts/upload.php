@@ -88,7 +88,11 @@ if ($fn) {
 
 // Check to see if it is a new document
 
-$docCheckQuery = "SELECT * FROM documents WHERE UploadID='$UploadID' FOR UPDATE";
+$lockQuery = "LOCK TABLES documents WRITE";
+mysql_query($lockQuery) or die(mysql_error());
+
+
+$docCheckQuery = "SELECT * FROM documents WHERE UploadID='$UploadID'";
 $docCheckResource = mysql_query($docCheckQuery) or die(mysql_error());
 $docCheckResult = mysql_num_rows($docCheckResource);
 if ($docCheckResult == 0) {

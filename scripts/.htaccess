@@ -1,0 +1,13 @@
+ExpiresActive On
+ExpiresDefault A0
+
+<filesMatch ".(gif|jpg|jpeg|png|swf)$">
+ExpiresDefault A604800
+Header append Cache-Control "public"
+</filesMatch>
+
+<filesMatch ".(php|cgi|pl|html)$">
+ExpiresActive Off
+Header set Cache-Control "private, no-cache, no-store, proxy-revalidate, no-transform"
+Header set Pragma "no-cache"
+</filesMatch>
