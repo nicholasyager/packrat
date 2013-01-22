@@ -242,10 +242,10 @@ function fetchDocuments(query, type) {
 			
 			$.each(documents, function(key, value) {
 
-				var imageThumb = "uploads/" + value.Pages[1];
+				var imageThumb =  value.Pages[1];
 				var image = "uploads/" + value.Pages[1];
 
-				var $item = $('<div class="item" data-id="'+key+'" data-json='+"'"+JSON.stringify(value)+"'"+'" > <span class="itemLabel">'+value.Metadata.Title+'</span><img src="' + imageThumb + '" width="' + bestWidth + '" height="' + value.Height + '" /></div>');
+				var $item = $('<div class="item" data-id="'+key+'" data-json='+"'"+JSON.stringify(value)+"'"+'" > <span class="itemLabel">'+value.Metadata.Title+'</span><img src="scripts/otfImages.php?url=' + imageThumb + '&width='+bestWidth+'" width="' + bestWidth + '" height="' + value.Height + '" /></div>');
 				$('#UI').isotope( 'insert', $item);
 			
 				$($item).click(function() {
