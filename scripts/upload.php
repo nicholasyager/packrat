@@ -16,7 +16,7 @@ $Meta = $_SERVER['HTTP_META'];
 $userToken = $_COOKIE['token'];
 
 // Find the User_ID
-$userQuery = "SELECT User_ID FORM users WHERE Password='$userToken'";
+$userQuery = "SELECT User_ID FROM users WHERE Password='$userToken'";
 $userResource = mysql_query($userQuery) or die(mysql_error());
 while ($row  = mysql_fetch_assoc($userResource)) {
 
@@ -96,7 +96,7 @@ if ($docCheckResult == 0) {
 	// There are no documents by that ID
 	$page_array = array($Page => $newfn);
 	$page_JSON = json_encode($page_array);
-	$documentQuery = "INSERT INTO documents (UploadID,Metadata,Pages,Tagsi,Owner) VALUES ('$UploadID','$Meta_JSON','$page_JSON','$Tag_JSON','$User_ID')";
+	$documentQuery = "INSERT INTO documents (UploadID,Metadata,Pages,Tags,Owner) VALUES ('$UploadID','$Meta_JSON','$page_JSON','$Tag_JSON','$User_ID')";
 
 } else {
 

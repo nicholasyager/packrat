@@ -43,9 +43,7 @@
 
 	if ($type == "query") {
 
-		$queryString = str_replace(" ", "|", $query);
-
-		$searchQuery = "SELECT * FROM documents WHERE Owner='$userID' AND Metadata REGEXP '$queryString' OR Tags REGEXP '$queryString' ";
+		$searchQuery = "SELECT * FROM documents WHERE Owner='$userID' AND MATCH (Tags) AGAINST ('$query' WITH QUERY EXPANSION) OR MATCH (Metadata) AGAINST ('$query' WITH QUERY EXPANSION)";
 
 		$resource = mysql_query($searchQuery) or die(mysql_error());
 		

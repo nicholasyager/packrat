@@ -8,6 +8,7 @@ function FileDragHover(e) {
 	e.target.className = (e.type == "dragover" ? "hover" : "");
 	if (e.type == "dragover") {
 		$("#UI").fadeOut('fast');
+		$("#searchbar").fadeOut('fast');
 		$("#filedrag").fadeIn('fast');
 	}
 
@@ -116,6 +117,7 @@ function startUpload(files) {
 
 					$("#filedrag").fadeOut('fast');
 					$("#UI").fadeIn('fast');
+					$("#searchbar").fadeIn('fast');
 					fetchDocuments(query="",type="all");
 
 				}
