@@ -186,10 +186,14 @@ function eraseCookie(name) {
         createCookie(name,"",-1);
 }
 
-function dynamicLayout() {
+function dynamicLayout(defaultWidth) {
 
-	var defaultWidth = 240;
+	
+	// Set defaultWidth if undefined.
+	defaultWidth = (( defaultWidth != null) ? defaultWidth : 240);
+
 	var displayWidth = $(document).width();
+
 	var differentWidths = displayWidth / defaultWidth;
 	var maximumRow = Math.floor(differentWidths);
 	var bestWidth = displayWidth / maximumRow;
@@ -197,6 +201,17 @@ function dynamicLayout() {
 	var currentHeight = $(".item img").height();
 	var currentWidth = $(".item img").width();
 	var newHeight = ( currentHeight * bestWidth ) / currentWidth;
+
+	// There seems to be an issue with the scroll bar, so add in a check of the total potental height and such.
+
+	var numberOfRows = Math.ceil( $(".item").length / maximumRow);
+	if (numberOfRows * newHeight > $(document).height())
+	{
+
+		dynamicLayout();
+
+	}
+	
 
 	$(".item img").width(bestWidth + "px").height(newHeight + "px");
 	
@@ -249,7 +264,7 @@ function fetchDocuments(query, type) {
 
 				var $item = $('<div class="item" data-id="'+key+'" data-json='+"'"+JSON.stringify(value)+"'"+'" > <span class="itemLabel">'+value.Metadata.Title+'</span><img src="scripts/otfImages.php?url=' + imageThumb + '&width='+bestWidth+'" width="' + bestWidth + '" height="' + value.Height + '" /></div>');
 				$('#UI').isotope( 'insert', $item);
-			
+	
 				$($item).click(function() {
 
 					$("#UI").fadeOut('fast');
@@ -279,6 +294,8 @@ function fetchDocuments(query, type) {
 
 				});	
 
+				dynamicLayout();
+	
 				// Add in individual item clicks
 
 			});
